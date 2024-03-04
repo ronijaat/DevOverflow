@@ -1,0 +1,4 @@
+1.    setup 	
+	npm i eslint-config-standard
+	npm i eslint-plugin-tailwindcss
+	npm i prettier
