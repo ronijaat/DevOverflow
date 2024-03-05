@@ -2,3 +2,10 @@
 	npm i eslint-config-standard
 	npm i eslint-plugin-tailwindcss
 	npm i prettier
+2.  route groups
+	(group_name)
+
+3. rednering
+	ssg
+	ssr
+	isg (incremental site generation)
