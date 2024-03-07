@@ -11,7 +11,7 @@ const AskQuestion = async () => {
 
   const mongoUser = await User.findOne({ clerkid: userId });
 
-  console.log(mongoUser);
+  // console.log(mongoUser);
 
   return (
     <div>
