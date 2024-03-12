@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/context/ThemeProvider';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import '../styles/prism.css';
 import './globals.css';
 
 const inter = Inter({
