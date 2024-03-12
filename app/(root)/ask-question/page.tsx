@@ -1,10 +1,11 @@
 import Question from '@/components/forms/Question';
 import User from '@/database/user.model';
 import { connectToDatabase } from '@/lib/mongoose';
+import { auth } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 
 const AskQuestion = async () => {
-  const userId = '123456789';
+  const { userId } = auth();
   if (!userId) redirect('/sign-in');
 
   connectToDatabase();
