@@ -51,7 +51,7 @@ export async function createQuestion(params: CreateQuestionParams) {
         { upsert: true, new: true }
       );
 
-      console.log('Existing Tag:', existingTag);
+      // console.log('Existing Tag:', existingTag);
       tagDocuments.push(existingTag._id);
     }
 
