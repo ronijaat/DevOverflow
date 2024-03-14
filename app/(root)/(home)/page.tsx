@@ -9,7 +9,8 @@ import { getQuestions } from '@/lib/actions/question.action';
 import Link from 'next/link';
 
 export default async function Home() {
-  const questions = await getQuestions({});
+  const result = await getQuestions({});
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -41,23 +42,20 @@ export default async function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions ? (
-          questions.questions?.map((question, i) => {
-            // console.log(question);
-            return (
-              <QuestionCard
-                key={i}
-                _id={question.id}
-                title={question.title}
-                upvotes={question.upvotes.length}
-                tags={question.questionToTags}
-                author={question.author}
-                views={question.views}
-                answers={question.answers.length}
-                createdAt={question.createdAt}
-              />
-            );
-          })
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              author={question.author}
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
+          ))
         ) : (
           <NoResult
             title="There’s no question to show"
