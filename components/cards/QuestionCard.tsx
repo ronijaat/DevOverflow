@@ -2,24 +2,22 @@ import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
 import Link from 'next/link';
 import Metric from '../shared/Metric';
 import RenderTag from '../shared/RenderTag';
+// import EditDeleteAction from '../shared/EditDeleteAction';
 
 interface QuestionProps {
   _id: string;
   title: string;
-  questionToTags: {
-    questionId: string;
-    tagId: string;
-    tag: {
-      id: string;
-      name: string;
-    };
+  tags: {
+    _id: string;
+    name: string;
   }[];
   author: {
-    id: string;
+    _id: string;
     name: string;
     picture: string;
+    clerkId: string;
   };
-  upvotes: string[] | object[];
+  upvotes: string[];
   views: number;
   answers: Array<object>;
   createdAt: Date;
@@ -27,15 +25,18 @@ interface QuestionProps {
 }
 
 const QuestionCard = ({
+  clerkId,
   _id,
   title,
-  questionToTags,
+  tags,
   author,
   upvotes,
   views,
   answers,
   createdAt,
 }: QuestionProps) => {
+  const showActionButtons = clerkId && clerkId === author.clerkId;
+
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-start justify-between gap-5 sm:flex-row">
@@ -50,12 +51,16 @@ const QuestionCard = ({
           </Link>
         </div>
 
-        {/* If signed in add edit delete actions */}
+        {/* <SignedIn>
+          {showActionButtons && (
+            <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
+          )}
+        </SignedIn> */}
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">
-        {questionToTags?.map((tags) => (
-          <RenderTag key={tags.tag.id} _id={tags.tag.id} name={tags.tag.name} />
+        {tags.map((tag) => (
+          <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
 
@@ -65,32 +70,33 @@ const QuestionCard = ({
           alt="user"
           value={author.name}
           title={` - asked ${getTimestamp(createdAt)}`}
-          href={`/profile/${author.id}`}
+          href={`/profile/${author._id}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />
-
-        <Metric
-          imgUrl="/assets/icons/like.svg"
-          alt="Upvotes"
-          value={formatAndDivideNumber(upvotes.length)}
-          title=" Votes"
-          textStyles="small-medium text-dark400_light800"
-        />
-        <Metric
-          imgUrl="/assets/icons/message.svg"
-          alt="message"
-          value={formatAndDivideNumber(answers.length)}
-          title=" Answers"
-          textStyles="small-medium text-dark400_light800"
-        />
-        <Metric
-          imgUrl="/assets/icons/eye.svg"
-          alt="eye"
-          value={formatAndDivideNumber(views)}
-          title=" Views"
-          textStyles="small-medium text-dark400_light800"
-        />
+        <div className="flex items-center gap-3 max-sm:flex-wrap max-sm:justify-start">
+          <Metric
+            imgUrl="/assets/icons/like.svg"
+            alt="Upvotes"
+            value={formatAndDivideNumber(upvotes.length)}
+            title=" Votes"
+            textStyles="small-medium text-dark400_light800"
+          />
+          <Metric
+            imgUrl="/assets/icons/message.svg"
+            alt="message"
+            value={formatAndDivideNumber(answers.length)}
+            title=" Answers"
+            textStyles="small-medium text-dark400_light800"
+          />
+          <Metric
+            imgUrl="/assets/icons/eye.svg"
+            alt="eye"
+            value={formatAndDivideNumber(views)}
+            title=" Views"
+            textStyles="small-medium text-dark400_light800"
+          />
+        </div>
       </div>
     </div>
   );
