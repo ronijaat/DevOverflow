@@ -1,8 +1,9 @@
 import { formatAndDivideNumber, getTimestamp } from '@/lib/utils';
+import { SignedIn } from '@clerk/nextjs';
 import Link from 'next/link';
+import EditDeleteAction from '../shared/EditDeleteAction';
 import Metric from '../shared/Metric';
 import RenderTag from '../shared/RenderTag';
-// import EditDeleteAction from '../shared/EditDeleteAction';
 
 interface QuestionProps {
   _id: string;
@@ -51,11 +52,11 @@ const QuestionCard = ({
           </Link>
         </div>
 
-        {/* <SignedIn>
+        <SignedIn>
           {showActionButtons && (
             <EditDeleteAction type="Question" itemId={JSON.stringify(_id)} />
           )}
-        </SignedIn> */}
+        </SignedIn>
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">
