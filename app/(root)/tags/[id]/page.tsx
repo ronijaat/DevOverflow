@@ -1,65 +1,64 @@
-import Filter from '@/components/shared/Filter';
+import QuestionCard from '@/components/cards/QuestionCard';
 import NoResult from '@/components/shared/NoResult';
 import LocalSearchbar from '@/components/shared/search/LocalSearchbar';
-import { UserFilters } from '@/constants/filters';
-import { getAllTags } from '@/lib/actions/tag.actions';
-import Link from 'next/link';
+import { IQuestion } from '@/database/question.model';
+import { getQuestionsByTagId } from '@/lib/actions/tag.actions';
+import { URLProps } from '@/types';
 
-const Page = async () => {
-  const result = await getAllTags({});
+const Page = async ({ params, searchParams }: URLProps) => {
+  const result = await getQuestionsByTagId({
+    tagId: params.id,
+    page: 1,
+    searchQuery: searchParams.q,
+  });
+
+  console.log(result);
 
   return (
     <>
-      <h1 className="h1-bold text-dark100_light900">All Tags</h1>
+      <h1 className="h1-bold text-dark100_light900">{result.tagTitle}</h1>
 
-      <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
+      <div className="mt-11 w-full">
         <LocalSearchbar
-          route="/tags"
+          route={`/tags/${params.id}`}
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
-          placeholder="Search for tags"
+          placeholder="Search tag questions"
           otherClasses="flex-1"
-        />
-
-        <Filter
-          filters={UserFilters}
-          otherClasses="min-h-[56px] sm:min-w-[170px]"
         />
       </div>
 
-      <section className="mt-12 flex flex-wrap gap-4">
-        {result.tags.length > 0 ? (
-          result.tags.map((tag) => (
-            <Link
-              href={`/tags/${tag._id}`}
-              key={tag._id}
-              className="shadow-light100_darknone"
-            >
-              <article className="background-light900_dark200 light-border flex w-full flex-col rounded-2xl border px-8 py-10 sm:w-[260px]">
-                <div className="background-light800_dark400 w-fit rounded-sm px-5 py-1.5">
-                  <p className="paragraph-semibold text-dark300_light900">
-                    {tag.name}
-                  </p>
-                </div>
-
-                <p className="small-medium text-dark400_light500 mt-3.5">
-                  <span className="body-semibold primary-text-gradient mr-2.5">
-                    {tag.questions.length}+
-                  </span>{' '}
-                  Questions
-                </p>
-              </article>
-            </Link>
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {result.questions.length > 0 ? (
+          result.questions.map((question: IQuestion) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags as unknown as { _id: string; name: string }[]} // Use unknown to bypass type checking
+              author={
+                question.author as unknown as {
+                  _id: string;
+                  name: string;
+                  picture: string;
+                  clerkId: string;
+                }
+              } // Use unknown to bypass type checking
+              upvotes={question.upvotes}
+              views={question.views}
+              answers={question.answers}
+              createdAt={question.createdAt}
+            />
           ))
         ) : (
           <NoResult
-            title="No Tags Found"
-            description="It looks like there are no tags found."
+            title="There’s no tag question saved to show"
+            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the discussion. our query could be the next big thing others learn from. Get involved! 💡"
             link="/ask-question"
-            linkTitle="Ask a question"
+            linkTitle="Ask a Question"
           />
         )}
-      </section>
+      </div>
     </>
   );
 };
