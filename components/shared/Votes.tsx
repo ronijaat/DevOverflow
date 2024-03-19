@@ -13,6 +13,7 @@ import { formatAndDivideNumber } from '@/lib/utils';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import { toast } from '../ui/use-toast';
 
 interface Props {
   type: string;
@@ -48,7 +49,10 @@ const Votes = ({
 
   const handleVote = async (action: string) => {
     if (!userId) {
-      return;
+      return toast({
+        title: 'Please log in',
+        description: 'You must be logged in to perform this action',
+      });
     }
 
     if (action === 'upvote') {
@@ -70,8 +74,10 @@ const Votes = ({
         });
       }
 
-      // todo: show a toast
-      return;
+      return toast({
+        title: `Upvote ${!hasupVoted ? 'Successful' : 'Removed'}`,
+        variant: !hasupVoted ? 'default' : 'destructive',
+      });
     }
 
     if (action === 'downvote') {
@@ -93,7 +99,10 @@ const Votes = ({
         });
       }
 
-      // todo: show a toast
+      return toast({
+        title: `Downvote ${!hasdownVoted ? 'Successful' : 'Removed'}`,
+        variant: !hasdownVoted ? 'default' : 'destructive',
+      });
     }
   };
 

@@ -21,6 +21,7 @@ import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
+import { toast } from '../ui/use-toast';
 
 interface Props {
   type?: string;
@@ -65,6 +66,11 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           path: pathname,
         });
 
+        toast({
+          title: 'Question edited',
+          description: 'Your question has been successfully edited.',
+        });
+
         router.push(`/question/${parsedQuestionDetails._id}`);
       } else {
         await createQuestion({
@@ -73,6 +79,11 @@ const Question = ({ type, mongoUserId, questionDetails }: Props) => {
           tags: values.tags,
           author: JSON.parse(mongoUserId),
           path: pathname,
+        });
+
+        toast({
+          title: 'Question posted',
+          description: 'Your question has been successfully posted.',
         });
 
         router.push('/');
