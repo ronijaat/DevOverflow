@@ -31,7 +31,7 @@ const Jobs = async ({ searchParams }: SearchParamsProps) => {
         <Filter
           filters={CountriesFilters}
           otherClasses="min-h-[56px] sm:min-w-[210px]"
-          boxClasses="max-w-[170px]"
+          boxClasses="max-w-[170px] z-[9999] bg-white"
           value="Select Location"
         />
       </div>

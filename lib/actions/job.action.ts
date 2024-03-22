@@ -20,7 +20,7 @@ export async function getJobs(params: GetJobsParams) {
   };
   try {
     const response = await axios.request(options);
-    console.log(response.data.data);
+    // console.log(response.data.data);
     if (response.data.data && response.data.data.length > 0) {
       if (response.data.data.length < pageSize) {
         return { jobs: response.data.data, isNext: false };

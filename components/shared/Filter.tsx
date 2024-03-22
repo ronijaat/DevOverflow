@@ -47,7 +47,7 @@ const Filter = ({
   };
 
   return (
-    <div className={`relative ${containerClasses}`}>
+    <div className={`relative ${containerClasses} z-[9999]`}>
       <Select
         onValueChange={handleUpdateParams}
         defaultValue={paramFilter || undefined}
@@ -60,7 +60,7 @@ const Filter = ({
           </div>
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup className={`${boxClasses}`}>
+          <SelectGroup className={`${boxClasses} z-[9999]`}>
             {filters.map((item) => (
               <SelectItem
                 key={item.value}
