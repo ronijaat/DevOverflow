@@ -14,7 +14,7 @@ export async function getJobs(params: GetJobsParams) {
       num_pages: '1',
     },
     headers: {
-      'X-RapidAPI-Key': (process.env.RAPID_API_KEY as string) || '',
+      'X-RapidAPI-Key': process.env.RAPID_API_KEY,
       'X-RapidAPI-Host': 'jsearch.p.rapidapi.com',
     },
   };
