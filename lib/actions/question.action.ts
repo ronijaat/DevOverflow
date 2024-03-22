@@ -5,6 +5,7 @@ import Interaction from '@/database/interaction.model';
 import Question from '@/database/question.model';
 import Tag from '@/database/tag.model';
 import User from '@/database/user.model';
+//@ts-ignore
 import { FilterQuery } from 'mongoose';
 import { revalidatePath } from 'next/cache';
 import { connectToDatabase } from '../mongoose';
@@ -304,7 +305,7 @@ export async function getRecommendedQuestions(params: RecommendedParams) {
       .exec();
 
     // Extract tags from user's interactions
-    const userTags = userInteractions.reduce((tags, interaction) => {
+    const userTags = userInteractions.reduce((tags: any, interaction: any) => {
       if (interaction.tags) {
         tags = tags.concat(interaction.tags);
       }

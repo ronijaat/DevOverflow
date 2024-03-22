@@ -58,6 +58,13 @@ export interface GetQuestionsParams {
   filter?: string;
 }
 
+export interface GetJobsParams {
+  page?: number;
+  pageSize?: number;
+  searchQuery?: string;
+  filter?: string;
+}
+
 export interface CreateQuestionParams {
   title: string;
   content: string;
