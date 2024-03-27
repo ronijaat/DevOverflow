@@ -14,6 +14,8 @@ const Jobs = async ({ searchParams }: SearchParamsProps) => {
     searchQuery: searchParams.q,
   });
 
+  // console.log(result?.jobs);
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -38,17 +40,16 @@ const Jobs = async ({ searchParams }: SearchParamsProps) => {
 
       <div className="mt-10 flex w-full flex-col gap-6">
         {result?.jobs.length > 0 ? (
-          result?.jobs.map((job: any) => (
+          result?.jobs?.map((job: any) => (
             <JobCard
-              key={job.job_id}
-              job_title={job.job_title}
-              job_apply_link={job.job_apply_link}
-              job_description={job.job_description}
-              job_city={job.job_city}
-              job_state={job.job_state}
-              job_country={job.job_country}
-              job_employment_type={job.job_employment_type}
-              employer_logo={job.employer_logo}
+              job_title={job.job_title || ''}
+              job_apply_link={job.job_apply_link || ''}
+              job_description={job.job_description || ''}
+              job_city={job.job_city || ''}
+              job_state={job.job_state || ''}
+              job_country={job.job_country || ''}
+              job_employment_type={job.job_employment_type || ''}
+              employer_logo={job.employer_logo || ''}
             />
           ))
         ) : (

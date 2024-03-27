@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 
 interface Params {
-  key: string;
   job_title: string;
   job_apply_link: string;
   job_description: string;
@@ -15,7 +14,6 @@ interface Params {
 }
 
 const JobCard = ({
-  key,
   job_title,
   job_apply_link,
   job_description,
@@ -29,12 +27,12 @@ const JobCard = ({
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11 shadow-xl z-1">
       <div className="flex flex-row justify-start items-start gap-3">
         <div className="mall-medium text-dark400_light800 rounded-xl min-w-14 min-h-14 flex justify-center items-center">
-          {/* <Image
+          <Image
             src={employer_logo}
             alt="Employer Logo"
             width={40}
             height={40}
-          /> */}
+          />
         </div>
         <div className="flex flex-col items-start justify-between gap-2">
           <div>

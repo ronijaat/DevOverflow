@@ -2,10 +2,19 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      'img.clerk.com',
-      'encrypted-tbn0.gstatic.com',
-      'mma.prnewswire.com',
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http',
+        hostname: '*',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
 };
