@@ -14,6 +14,24 @@ pnpm dev
 bun dev
 ```
 
+.env.local : 
+
+```bash
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+CLERK_SECRET_KEY
+NEXT_PUBLIC_TINY_EDITOR_API_KEY
+MONGODB_URL
+NEXT_CLERK_WEBHOOK_SECRET
+NEXT_PUBLIC_SERVER_URL
+OPENAI_API_KEY
+RAPID_API_KEY
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
