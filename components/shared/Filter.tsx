@@ -59,8 +59,8 @@ const Filter = ({
             <SelectValue placeholder={`${value ? value : 'Select a Filter'}`} />
           </div>
         </SelectTrigger>
-        <SelectContent>
-          <SelectGroup className={`${boxClasses} z-[9999]`}>
+        <SelectContent className="bg-white dark:bg-slate-800">
+          <SelectGroup className={`${boxClasses} z-[9999] dark:bg-slate-800`}>
             {filters.map((item) => (
               <SelectItem
                 key={item.value}

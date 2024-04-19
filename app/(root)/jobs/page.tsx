@@ -27,7 +27,7 @@ const Jobs = async ({ searchParams }: SearchParamsProps) => {
           iconPosition="left"
           imgSrc="/assets/icons/search.svg"
           placeholder="Job Title,Company, or Keywords"
-          otherClasses="flex-1"
+          otherClasses="flex-1 dark:bg-slate-800 dark:text-slate-100"
         />
 
         <Filter
@@ -53,7 +53,7 @@ const Jobs = async ({ searchParams }: SearchParamsProps) => {
             />
           ))
         ) : (
-          <h1 className="text-center text-dark100_light900">
+          <h1 className="text-center background-light800_dark300 text-light400_light500">
             Oops! We couldn't find any jobs at the moment. Please try again
             later
           </h1>
