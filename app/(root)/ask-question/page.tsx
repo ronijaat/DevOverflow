@@ -10,7 +10,7 @@ const AskQuestion = async () => {
 
   connectToDatabase();
 
-  const mongoUser = await User.findOne({ clerkid: userId });
+  const mongoUser = await User.findOne({ clerkId: { $eq: userId } });
 
   // console.log(mongoUser);
 
