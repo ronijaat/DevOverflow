@@ -250,8 +250,12 @@ export async function getUserInfo(params: GetUserByIdParams) {
     connectToDatabase();
 
     const { userId } = params;
-
-    const user = await User.findOne({ clerkId: { $eq: userId } });
+    let user;
+    if (userId.startsWith('user')) {
+      user = await User.findOne({ clerkId: { $eq: userId } });
+    } else {
+      await User.findOne({ _id: userId });
+    }
 
     if (!user) {
       throw new Error('User not found');
