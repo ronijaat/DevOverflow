@@ -26,7 +26,7 @@ export async function getUserById(params: any) {
 
     const { userId } = params;
 
-    const user = await User.findOne({ clerkId: userId });
+    const user = await User.findOne({ clerkId: { $eq: userId } });
 
     return user;
   } catch (error) {
@@ -251,7 +251,7 @@ export async function getUserInfo(params: GetUserByIdParams) {
 
     const { userId } = params;
 
-    const user = await User.findOne({ clerkId: userId });
+    const user = await User.findOne({ clerkId: { $eq: userId } });
 
     if (!user) {
       throw new Error('User not found');

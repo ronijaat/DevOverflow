@@ -291,7 +291,7 @@ export async function getRecommendedQuestions(params: RecommendedParams) {
     const { userId, page = 1, pageSize = 20, searchQuery } = params;
 
     // find user
-    const user = await User.findOne({ clerkId: userId });
+    const user = await User.findOne({ clerkId: { $eq: userId } });
 
     if (!user) {
       throw new Error('user not found');
