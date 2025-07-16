@@ -250,11 +250,12 @@ export async function getUserInfo(params: GetUserByIdParams) {
     connectToDatabase();
 
     const { userId } = params;
+    console.log(userId);
     let user;
     if (userId.startsWith('user')) {
       user = await User.findOne({ clerkId: { $eq: userId } });
     } else {
-      await User.findOne({ _id: userId });
+      user = await User.findOne({ _id: userId });
     }
 
     if (!user) {
