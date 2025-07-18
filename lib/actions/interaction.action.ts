@@ -16,7 +16,9 @@ export async function viewQuestion(params: ViewQuestionParams) {
       $inc: { views: 1 },
     });
 
-    if (userId) {
+    // console.log('ques', ques);
+
+    if (userId && ques) {
       const existingInteraction = await Interaction.findOne({
         user: userId,
         action: 'view',
