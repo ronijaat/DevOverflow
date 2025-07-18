@@ -12,7 +12,9 @@ export async function viewQuestion(params: ViewQuestionParams) {
     const { questionId, userId } = params;
 
     // Update view count for the question
-    await Question.findByIdAndUpdate(questionId, { $inc: { views: 1 } });
+    const ques = await Question.findByIdAndUpdate(questionId, {
+      $inc: { views: 1 },
+    });
 
     if (userId) {
       const existingInteraction = await Interaction.findOne({
@@ -28,6 +30,7 @@ export async function viewQuestion(params: ViewQuestionParams) {
         user: userId,
         action: 'view',
         question: questionId,
+        tags: ques.tags,
       });
     }
   } catch (error) {
